@@ -1,21 +1,20 @@
 # Measuring Brainwaves
 
-[![GitHub version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/nikhiljay/brainwaves/releases)
-![](https://img.shields.io/badge/platform-ios%20%7C%20osx-lightgray.svg)
-![](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
+Emotiv Plus with Linux and HID library
 
-This is my project for Advanced Authentic Research (<a href="http://aar.pausd.org" target="_blank">AAR</a>). Follow the progress of this project on my <a href="http://pugiblog.com/category/science/advanced-authentic-research/" target="_blank">blog</a>. This project uses <a href="https://github.com/openyou/emokit" target="_blank">emokit</a> which is an open source driver used to access the Emotiv Device raw data.
+This project is Forked from https://github.com/nikhiljay/brainwaves
 
-![](https://pugiblog.files.wordpress.com/2015/12/section1-epoc.png)
+I found some problems and fix it, also use HID, I couldn't fix using HIDAPI ( and for HIDAPI i try to use https://github.com/tahesse/CyKITv2 but i Failed )
+
+This project uses <a href="https://github.com/openyou/emokit" target="_blank">emokit</a> which is an open source driver used to access the Emotiv Device raw data.
 
 ## Extracting the Raw Data
 
 1) Download the repository
 
 ```
-$ git clone https://github.com/nikhiljay/brainwaves.git
+$ git clone https://github.com/titusfx/brainwaves.git
 ```
-
 2) Plug in your <a href="https://emotiv.com" target="_blank">Emotiv</a>'s USB dongle.
 
 3) Find the Serial Number of the Emotiv by downloading HIDAPI.
@@ -25,13 +24,16 @@ $ git clone https://github.com/signal11/hidapi.git
 $ cd hidapi
 ```
 
-4) In the HIDAPI go to the directory that corresponds to your operating system and run: 
+4) In the HIDAPI go to the directory that corresponds to your operating system (in my case linux) and run: 
 
 ```
 $ make -f Makefile-manual
 ```
 
 5) A hidtest file should be created in the same directory. Open the hidtest to run it. On linux, you must run this using sudo.
+```
+$ sudo ./hidtest-hidraw 
+```
 
 6) The output should be a list of devices that are connected to the computer. Look at the Emotiv device information and copy the Serial Number.
 
@@ -41,10 +43,10 @@ $ make -f Makefile-manual
 $ cd emokit/python/emokit
 ```
 
-8) Open "emotiv.py" and paste the serial number on line 361 where it says:
+8) Open "emotiv.py" and paste the serial number on line where it says:
 
 ```
-serial_number=""
+def __init__(self, display_output=True, serial_number="
 ```
 
 10) Run the "emotiv.py" file.
@@ -53,7 +55,8 @@ serial_number=""
 $ python emotiv.py
 ```
 
-11) If there are any dependencies that need to be installed used the "pip" command.
+11) If there are any dependencies ( in my case where pycrypto, bottle, gevent)
+ that need to be installed used the "pip" command.
 
 ```
 $ sudo pip install [missing dependency goes here]
@@ -79,9 +82,3 @@ Traceback (most recent call last):
 These electrodes in the picture above represent certain parts of the brain shown here:
 
 ![](http://i.imgur.com/xTtsqc7m.jpg)
-
-## Displaying Data on an iOS Device
-
-After extracting the Emotiv data, I sent the data as a JSON file to a <a href="https://ngrok.com" target="_blank">local server</a>. Then, I created an iOS app and used <a href="https://github.com/Alamofire/Alamofire" target="_blank">Alamofire</a> to get request the data from the server. I created the app so that it would display the raw data on the iOS device. Here is what it looks like so far:
-
-![](https://media.giphy.com/media/nWbdCoU9LZfVe/giphy.gif)
