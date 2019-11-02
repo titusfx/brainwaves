@@ -4,7 +4,7 @@ Emotiv Plus with Linux and HID library
 
 This project is Forked from https://github.com/nikhiljay/brainwaves
 
-I found some problems and fix it, also use HID, I couldn't fix using HIDAPI ( and for HIDAPI i try to use https://github.com/tahesse/CyKITv2 but i Failed )
+I found some problems and fix it, also use HID ( hidapi cython library ) for hidapy python library (pyhidapi ) use this repo https://github.com/titusfx/CyKITv2
 
 This project uses <a href="https://github.com/openyou/emokit" target="_blank">emokit</a> which is an open source driver used to access the Emotiv Device raw data.
 
