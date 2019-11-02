@@ -242,7 +242,7 @@ def get_linux_setup():
             with open(input[0] + "/manufacturer", 'r') as f:
                 manufacturer = f.readline()
                 f.close()
-            if "Emotiv Systems" in manufacturer:
+            if "Emotiv" in manufacturer:
                 with open(input[0] + "/serial", 'r') as f:
                     serial = f.readline().strip()
                     f.close()
@@ -256,6 +256,8 @@ def get_linux_setup():
                 hidraw = "hidraw" + hidraw_id.__str__()
                 print "Serial: " + serial + " Device: " + hidraw + " (Active)"
                 return [serial, hidraw, ]
+            else:
+                print "Emotiv is not in the list of the manufacturer, current manufacturer" + str(manufacturer)
         except IOError as e:
             print "Couldn't open file: %s" % e
 
